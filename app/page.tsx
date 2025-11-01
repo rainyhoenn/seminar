@@ -1,4 +1,9 @@
 import Image from "next/image";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function Home() {
   const runtimeComparison = [
@@ -256,15 +261,17 @@ export default function Home() {
               >
                 <div className="flex items-center gap-2">
                   <h3 className="text-base font-semibold text-zinc-900 sm:text-lg">{item.metric}</h3>
-                  <div className="group relative">
-                    <span className="text-zinc-400 hover:text-zinc-600 cursor-help text-sm">ⓘ</span>
-                    <div className="absolute bottom-full left-0 mb-2 px-3 py-2 bg-zinc-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-normal z-10 max-w-[200px] sm:whitespace-nowrap sm:max-w-sm">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span className="text-zinc-400 hover:text-zinc-600 cursor-help text-sm">ⓘ</span>
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-[200px] sm:max-w-sm">
                       {item.metric === "Startup speed" && "How quickly the runtime initializes and becomes ready to execute code"}
                       {item.metric === "Package ecosystem" && "Available libraries, tools, and community support through package registries"}
                       {item.metric === "Language features" && "Modern JavaScript/TypeScript features and standards compliance"}
                       {item.metric === "Runtime extras" && "Built-in tools like bundlers, test runners, and package managers"}
-                    </div>
-                  </div>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
                 <div className="grid gap-2.5 text-xs sm:gap-3 sm:text-sm">
                   <div className="rounded-lg bg-white/70 p-2.5 shadow-sm ring-1 ring-zinc-200 sm:rounded-xl sm:p-3">
@@ -287,12 +294,14 @@ export default function Home() {
                         if (explanation) {
                           return (
                             <span key={index}>
-                              <span className="group relative cursor-help">
-                                <span className="border-b border-dotted border-zinc-400 hover:border-zinc-600">{word}</span>
-                                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-zinc-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-20">
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <span className="border-b border-dotted border-zinc-400 hover:border-zinc-600 cursor-help">{word}</span>
+                                </TooltipTrigger>
+                                <TooltipContent>
                                   {explanation}
-                                </div>
-                              </span>
+                                </TooltipContent>
+                              </Tooltip>
                               {index < item.node.split(' ').length - 1 ? ' ' : ''}
                             </span>
                           );
@@ -322,12 +331,14 @@ export default function Home() {
                         if (explanation) {
                           return (
                             <span key={index}>
-                              <span className="group relative cursor-help">
-                                <span className="border-b border-dotted border-zinc-400 hover:border-zinc-600">{word}</span>
-                                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 px-2 py-1 bg-zinc-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-20">
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <span className="border-b border-dotted border-zinc-400 hover:border-zinc-600 cursor-help">{word}</span>
+                                </TooltipTrigger>
+                                <TooltipContent>
                                   {explanation}
-                                </div>
-                              </span>
+                                </TooltipContent>
+                              </Tooltip>
                               {index < item.bun.split(' ').length - 1 ? ' ' : ''}
                             </span>
                           );
@@ -368,15 +379,17 @@ export default function Home() {
                     <div className="flex-1">
                       <div className="flex items-center gap-1.5 sm:gap-2">
                         <h3 className="text-sm font-semibold text-zinc-900 sm:text-base">{item.metric}</h3>
-                        <div className="group relative">
-                          <span className="text-zinc-400 hover:text-zinc-600 cursor-help text-xs sm:text-sm">ⓘ</span>
-                          <div className="absolute bottom-full left-0 mb-2 px-3 py-2 bg-zinc-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-normal z-20 max-w-[200px] sm:whitespace-nowrap sm:max-w-sm">
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <span className="text-zinc-400 hover:text-zinc-600 cursor-help text-xs sm:text-sm">ⓘ</span>
+                          </TooltipTrigger>
+                          <TooltipContent className="max-w-[200px] sm:max-w-sm">
                             {item.metric === "Cold start latency" && "Time to start a runtime and execute code when it's not already running"}
                             {item.metric === "HTTP server throughput" && "Number of HTTP requests a server can handle per second"}
                             {item.metric === "Package install time" && "Time to download and install npm packages from registry"}
                             {item.metric === "Average response latency" && "Average time from request to response across all requests"}
-                          </div>
-                        </div>
+                          </TooltipContent>
+                        </Tooltip>
                       </div>
                       <p className="mt-0.5 text-[10px] text-zinc-500 sm:mt-1 sm:text-xs">
                         {better === "lower" ? "Lower is better" : "Higher is better"} {directionIcon}
@@ -639,15 +652,17 @@ export default function Home() {
                                   <span className="text-[10px] font-semibold text-zinc-700 sm:text-xs">
                                     {metric.name}
                                   </span>
-                                  <div className="group relative">
-                                    <span className="text-zinc-400 hover:text-zinc-600 cursor-help text-[10px] sm:text-xs">ⓘ</span>
-                                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-zinc-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-normal z-20 max-w-[200px] sm:whitespace-nowrap sm:max-w-xs">
+                                  <Tooltip>
+                                    <TooltipTrigger asChild>
+                                      <span className="text-zinc-400 hover:text-zinc-600 cursor-help text-[10px] sm:text-xs">ⓘ</span>
+                                    </TooltipTrigger>
+                                    <TooltipContent className="max-w-[200px] sm:max-w-xs">
                                       {metric.name === "Lighthouse Score" && "Google's performance audit: measures loading, interactivity, and visual stability"}
                                       {metric.name === "Time to First Byte" && "Time from request to first byte of response - measures server responsiveness"}
                                       {metric.name === "Bundle Size" && "Size of JavaScript code sent to browser - affects loading speed"}
                                       {metric.name === "Build Time" && "Time to compile and optimize code for production deployment"}
-                                    </div>
-                                  </div>
+                                    </TooltipContent>
+                                  </Tooltip>
                                 </div>
                                 {isTopPerformer && (
                                   <span className="rounded-full bg-green-500/20 px-1.5 py-0.5 text-[9px] font-semibold text-green-600 sm:px-2 sm:text-[10px]">
@@ -819,36 +834,42 @@ export default function Home() {
                         <div className="flex items-center gap-0.5 sm:gap-1">
                           <span className="hidden sm:inline">Cold Start</span>
                           <span className="sm:hidden">Cold</span>
-                          <div className="group relative">
-                            <span className="text-zinc-400 hover:text-zinc-600 cursor-help text-[10px] sm:text-xs">ⓘ</span>
-                            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-zinc-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-normal z-10 max-w-[150px] sm:whitespace-nowrap sm:max-w-none">
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="text-zinc-400 hover:text-zinc-600 cursor-help text-[10px] sm:text-xs">ⓘ</span>
+                            </TooltipTrigger>
+                            <TooltipContent className="max-w-[150px] sm:max-w-none">
                               Time to initialize a function after inactivity
-                            </div>
-                          </div>
+                            </TooltipContent>
+                          </Tooltip>
                         </div>
                       </th>
                       <th className="px-3 py-2 font-medium sm:px-4 sm:py-3">
                         <div className="flex items-center gap-0.5 sm:gap-1">
                           <span className="hidden sm:inline">Execution Limit</span>
                           <span className="sm:hidden">Limit</span>
-                          <div className="group relative">
-                            <span className="text-zinc-400 hover:text-zinc-600 cursor-help text-[10px] sm:text-xs">ⓘ</span>
-                            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-zinc-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-normal z-10 max-w-[150px] sm:whitespace-nowrap sm:max-w-none">
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="text-zinc-400 hover:text-zinc-600 cursor-help text-[10px] sm:text-xs">ⓘ</span>
+                            </TooltipTrigger>
+                            <TooltipContent className="max-w-[150px] sm:max-w-none">
                               Maximum time a function can run
-                            </div>
-                          </div>
+                            </TooltipContent>
+                          </Tooltip>
                         </div>
                       </th>
                       <th className="px-3 py-2 font-medium sm:px-4 sm:py-3">
                         <div className="flex items-center gap-0.5 sm:gap-1">
                           <span className="hidden sm:inline">Global Edge</span>
                           <span className="sm:hidden">Edge</span>
-                          <div className="group relative">
-                            <span className="text-zinc-400 hover:text-zinc-600 cursor-help text-[10px] sm:text-xs">ⓘ</span>
-                            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-zinc-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-normal z-10 max-w-[150px] sm:whitespace-nowrap sm:max-w-none">
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="text-zinc-400 hover:text-zinc-600 cursor-help text-[10px] sm:text-xs">ⓘ</span>
+                            </TooltipTrigger>
+                            <TooltipContent className="max-w-[150px] sm:max-w-none">
                               Worldwide data centers for low latency
-                            </div>
-                          </div>
+                            </TooltipContent>
+                          </Tooltip>
                         </div>
                       </th>
                       <th className="px-3 py-2 font-medium sm:px-4 sm:py-3">Best For</th>
