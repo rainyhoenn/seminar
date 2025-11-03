@@ -190,6 +190,119 @@ export default function Home() {
     },
   ];
 
+  type ReferenceLink = {
+    label: string;
+    url: string;
+    summary: string;
+  };
+
+  type ReferenceGroup = {
+    title: string;
+    references: ReferenceLink[];
+  };
+
+  const referenceGroups: ReferenceGroup[] = [
+    {
+      title: "Runtime & tooling benchmarks",
+      references: [
+        {
+          label: "Oven: Bun v1.0 release benchmarks",
+          url: "https://bun.sh/blog/bun-v1.0",
+          summary:
+            "Cold start latency, HTTP throughput, and package install figures that shape the Bun vs Node runtime cards.",
+        },
+        {
+          label: "Node.js Foundation: About Node.js",
+          url: "https://nodejs.org/en/about",
+          summary:
+            "Background on Node.js' stability, LTS cadence, and ecosystem size referenced throughout the runtime comparison.",
+        },
+        {
+          label: "Bun documentation: Runtime overview",
+          url: "https://bun.sh/docs/runtime/overview",
+          summary:
+            "Describes Bun's TypeScript support, bundler, and built-in tooling cited under runtime extras and language features.",
+        },
+        {
+          label: "Bun CLI install documentation",
+          url: "https://bun.sh/docs/cli/install",
+          summary:
+            "Notes Bun's npm-compatible installer and install-time benchmarks inspiring the package install metric.",
+        },
+      ],
+    },
+    {
+      title: "Framework performance & capabilities",
+      references: [
+        {
+          label: "Next.js documentation",
+          url: "https://nextjs.org/docs",
+          summary:
+            "App Router, SSR/SSG/ISR, and React Server Components capabilities grounding the framework matrix values.",
+        },
+        {
+          label: "Remix documentation",
+          url: "https://remix.run/docs/en/main",
+          summary:
+            "Explains loaders, actions, and streaming responses referenced in Remix highlights and performance cards.",
+        },
+        {
+          label: "Announcing SvelteKit 1.0",
+          url: "https://svelte.dev/blog/announcing-sveltekit-1.0",
+          summary:
+            "Outlines SvelteKit's compiler-first design, adapters, and bundle optimisations used for SvelteKit metrics.",
+        },
+        {
+          label: "Krause's JS Framework Benchmark",
+          url: "https://krausest.github.io/js-framework-benchmark/current.html",
+          summary:
+            "Independent Lighthouse, TTFB, and bundle size measurements informing the comparative framework performance chart.",
+        },
+        {
+          label: "React documentation: Learn React",
+          url: "https://react.dev/learn",
+          summary:
+            "Clarifies React's component model, hooks, and rendering strategies summarized in the React in context section.",
+        },
+      ],
+    },
+    {
+      title: "Hosting & deployment trade-offs",
+      references: [
+        {
+          label: "Vercel pricing and limits",
+          url: "https://vercel.com/pricing",
+          summary:
+            "Free tier bandwidth and serverless execution limits referenced in the serverless hosting comparison table.",
+        },
+        {
+          label: "Vercel edge network overview",
+          url: "https://vercel.com/docs/concepts/edge-network/overview",
+          summary:
+            "Details on global edge regions and latency characteristics noted in the serverless hosting advantages.",
+        },
+        {
+          label: "Cloudflare Workers limits",
+          url: "https://developers.cloudflare.com/workers/platform/limits/",
+          summary:
+            "Execution time, cold start, and memory limits backing the Workers row in the platform comparison table.",
+        },
+        {
+          label: "AWS Lambda service quotas",
+          url: "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html",
+          summary:
+            "Duration ceilings and scaling behaviour underpinning the AWS Lambda execution limit values.",
+        },
+        {
+          label: "AWS serverless overview",
+          url: "https://aws.amazon.com/serverless/",
+          summary:
+            "High-level definition of serverless computing referenced in the explanatory tooltip inside the hosting section.",
+        },
+      ],
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-zinc-50 via-white to-zinc-100 font-sans">
       <main className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 py-8 sm:px-6 sm:py-12 md:gap-16 md:px-8 lg:gap-20 lg:px-12 lg:py-16">
@@ -968,7 +1081,49 @@ export default function Home() {
         </div>
         </section>
 
-        
+        <section className="grid gap-6 rounded-2xl border border-zinc-200 bg-white/80 p-6 shadow-lg shadow-zinc-900/5 backdrop-blur sm:gap-8 sm:rounded-3xl sm:p-8 md:gap-10 md:p-10">
+          <div className="flex flex-col gap-2 sm:gap-3">
+            <h2 className="text-xl font-semibold text-zinc-900 sm:text-2xl">Sources & references</h2>
+            <p className="text-xs text-zinc-600 sm:text-sm">
+              Metrics and qualitative comparisons in this guide pull from documentation, vendor benchmarks, and community
+              measurements. Explore the original sources below for deeper context, methodology, and updates.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
+            {referenceGroups.map((group) => (
+              <article
+                key={group.title}
+                className="flex h-full flex-col gap-3 rounded-xl border border-zinc-200 bg-white/70 p-4 shadow-sm sm:gap-4 sm:rounded-2xl sm:p-6"
+              >
+                <h3 className="text-base font-semibold text-zinc-900 sm:text-lg">{group.title}</h3>
+                <ul className="flex flex-1 list-disc flex-col gap-2 pl-4 text-xs leading-5 text-zinc-700 sm:gap-2.5 sm:pl-5 sm:text-sm sm:leading-6">
+                  {group.references.map((ref) => (
+                    <li key={ref.url} className="space-y-1">
+                      <a
+                        href={ref.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-blue-600 underline-offset-4 hover:text-blue-700 hover:underline"
+                      >
+                        {ref.label}
+                      </a>
+                      <p className="text-[11px] leading-snug text-zinc-500 sm:text-xs">{ref.summary}</p>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <footer className="mt-12 border-t border-zinc-200 bg-zinc-50/50 py-6 sm:py-8">
+          <div className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-12">
+            <p className="text-xs text-zinc-500 sm:text-sm">
+              Project by: Prithviraj Supekar
+            </p>
+          </div>
+        </footer>
       </main>
     </div>
   );
