@@ -1120,7 +1120,7 @@ export default function Home() {
         <footer className="mt-12 border-t border-zinc-200 bg-zinc-50/50 py-6 sm:py-8">
           <div className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-12">
             <p className="text-xs text-zinc-500 sm:text-sm">
-              Project by: Prithviraj Supekar
+              Project by - Prithviraj Supekar
             </p>
           </div>
         </footer>
